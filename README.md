@@ -4,7 +4,7 @@ Official PyTorch implementation of Consistency Regularization for Adversarial Ro
 [Jihoon Tack](https://jihoontack.github.io), 
 [Sihyun Yu](https://sihyun-yu.github.io), 
 [Jongheon Jeong](), 
-[Minseon Kim](), 
+[Minseon Kim](https://kim-minseon.github.io), 
 [Sung Ju Hwang](http://www.sungjuhwang.com/),
 and [Jinwoo Shin](http://alinlab.kaist.ac.kr/shin.html).
 
