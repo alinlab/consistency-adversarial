@@ -2,7 +2,7 @@
 
 Official PyTorch implementation of Consistency Regularization for Adversarial Robustness by 
 [Jihoon Tack](https://jihoontack.github.io), 
-[Sihyun Yu](), 
+[Sihyun Yu](https://sihyun-yu.github.io), 
 [Jongheon Jeong](), 
 [Minseon Kim](), 
 [Sung Ju Hwang](http://www.sungjuhwang.com/),
