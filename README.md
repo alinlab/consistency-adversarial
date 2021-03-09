@@ -1,6 +1,6 @@
 # Consistency Regularization for Adversarial Robustness
 
-Official PyTorch implementation of Consistency Regularization for Adversarial Robustness by 
+Official PyTorch implementation of [Consistency Regularization for Adversarial Robustness](https://arxiv.org/abs/2103.04623) by 
 [Jihoon Tack](https://jihoontack.github.io), 
 [Sihyun Yu](https://sihyun-yu.github.io), 
 [Jongheon Jeong](https://sites.google.com/view/jongheonj), 
