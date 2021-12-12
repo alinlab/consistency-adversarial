@@ -22,7 +22,7 @@ assert P.n_gpus <= 1  # no multi GPU
 set_random_seed(P.seed)
 
 ### Initialize dataset ###
-train_set, test_set, image_size, n_classes = get_dataset(P, dataset=P.dataset)
+train_set, test_set, image_size, n_classes = get_dataset(P, dataset=P.dataset, augment=P.augment_type)
 P.image_size = image_size
 P.n_classes = n_classes
 
@@ -30,6 +30,10 @@ P.n_classes = n_classes
 kwargs = {'pin_memory': True, 'num_workers': 8}
 train_loader = DataLoader(train_set, shuffle=True, batch_size=P.batch_size, **kwargs)
 test_loader = DataLoader(test_set, shuffle=False, batch_size=P.test_batch_size, **kwargs)
+
+if P.augment_type == 'autoaug_sche':
+    train_set_second, _, _, _ = get_dataset(P, dataset=P.dataset, augment='autoaug')
+    P.train_second_loader = DataLoader(train_set_second, shuffle=True, batch_size=P.batch_size, **kwargs)
 
 ### Initialize model ###
 model = C.get_classifier(P, n_classes=P.n_classes).to(device)

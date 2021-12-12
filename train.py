@@ -23,6 +23,9 @@ for epoch in range(start_epoch, P.epochs + 1):
     logger.log_dirname(f"Epoch {epoch}")
     model.train()
 
+    if P.augment_type == 'autoaug_sche' and epoch > (P.epochs/2):
+        train_loader = P.train_second_loader
+
     train(P, epoch, model, criterion, optimizer, scheduler, train_loader, logger=logger, **kwargs)
     model.eval()
 

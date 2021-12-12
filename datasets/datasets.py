@@ -5,6 +5,7 @@ import torch
 from torchvision import datasets, transforms
 
 from datasets.cifar_c import get_CIFAR10_C, get_CIFAR100_C
+from datasets.autoaugment import CIFAR10Policy
 
 
 DATA_PATH = '/data/'
@@ -55,19 +56,17 @@ def get_transform(augment_type, dataset):
     else:
         image_size = 32
 
-    if augment_type == 'base':
+    if augment_type in ['base', 'autoaug_sche']:
         train_transform = transforms.Compose([
             transforms.RandomCrop(image_size, padding=4),
             transforms.RandomHorizontalFlip(),
             transforms.ToTensor(),
         ])
-    elif augment_type == 'ccg':
-        color_jitter = transforms.ColorJitter(0.4, 0.4, 0.4, 0.1)
+    elif augment_type == 'autoaug':
         train_transform = transforms.Compose([
             transforms.RandomCrop(image_size, padding=4),
             transforms.RandomHorizontalFlip(),
-            transforms.RandomApply([color_jitter], p=0.8),
-            transforms.RandomGrayscale(p=0.2),
+            CIFAR10Policy(),
             transforms.ToTensor(),
         ])
         train_transform.transforms.append(CutoutDefault(int(image_size / 2)))
@@ -81,8 +80,8 @@ def get_transform(augment_type, dataset):
     return train_transform, test_transform
 
 
-def get_dataset(P, dataset, image_size=None, download=False):
-    train_transform, test_transform = get_transform(P.augment_type, dataset)
+def get_dataset(P, dataset, augment, download=False):
+    train_transform, test_transform = get_transform(augment, dataset)
 
     if P.consistency:
         train_transform = MultiDataTransform(train_transform)
